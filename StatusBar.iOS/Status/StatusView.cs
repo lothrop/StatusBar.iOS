@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -20,12 +21,12 @@ namespace StatusBar.iOS.Status
         private const float TopLineHeight = 4;
         private readonly UIView _top;
 
-        private struct StatusLineElement
+        private class StatusLineElement
         {
-            public StatusLine Line;
-            public NSLayoutConstraint TopConstraint;
-            public NSLayoutConstraint LeftConstraint;
-            public EventHandler ConfirmedHandler;
+            public StatusLine Line { get; set; }
+            public NSLayoutConstraint TopConstraint { get; set; }
+            public NSLayoutConstraint LeftConstraint { get; set; }
+            public EventHandler ConfirmedHandler { get; set; }
         }
 
         private readonly List<StatusLineElement> _statusLines = new List<StatusLineElement>();
@@ -66,7 +67,7 @@ namespace StatusBar.iOS.Status
             set { SetItemsSource(value); }
         }
 
-        private void SetItemsSource(IEnumerable value)
+        private async void SetItemsSource(IEnumerable value)
         {
             if (_itemsSource == value)
                 return;
@@ -78,7 +79,7 @@ namespace StatusBar.iOS.Status
             }
             _itemsSource = value;
 
-            ReloadAllItems();
+            await ReloadAllItemsAsync();
 
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
@@ -89,26 +90,26 @@ namespace StatusBar.iOS.Status
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            InvokeOnMainThread(() =>
+            InvokeOnMainThread(async () =>
                 {
                     switch (e.Action)
                     {
                         case NotifyCollectionChangedAction.Add:
-                            AddItems(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
+                            await AddItemsAsync(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
                             break;
                         case NotifyCollectionChangedAction.Remove:
-                            RemoveItems(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
+                            await RemoveItemsAsync(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
                             break;
                         case NotifyCollectionChangedAction.Replace:
-                            RemoveItems(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
-                            AddItems(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
+                            await RemoveItemsAsync(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
+                            await AddItemsAsync(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
                             break;
                         case NotifyCollectionChangedAction.Move:
-                            RemoveItems(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
-                            AddItems(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
+                            await RemoveItemsAsync(e.OldItems.Cast<IMessageItem>(), e.OldStartingIndex, true);
+                            await AddItemsAsync(e.NewItems.Cast<IMessageItem>(), e.NewStartingIndex, true);
                             break;
                         case NotifyCollectionChangedAction.Reset:
-                            ReloadAllItems();
+                            await ReloadAllItemsAsync();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -116,33 +117,33 @@ namespace StatusBar.iOS.Status
                 });
         }
 
-        private void ReloadAllItems()
+        private async Task ReloadAllItemsAsync()
         {
             for (int position = _statusLines.Count - 1; position >= 0; --position)
             {
-                RemoveItem(position, false);
+                await RemoveItemAsync(position, false);
             }
-            AddItems(_itemsSource.Cast<IMessageItem>(), 0, false);
+            await AddItemsAsync(_itemsSource.Cast<IMessageItem>(), 0, false);
         }
 
-        private void AddItems(IEnumerable<IMessageItem> newItems, int newStartingIndex, bool animate)
+        private async Task AddItemsAsync(IEnumerable<IMessageItem> newItems, int newStartingIndex, bool animate)
         {
             foreach (var item in newItems)
             {
-                AddItem(item, newStartingIndex, animate);
+                await AddItemAsync(item, newStartingIndex, animate);
                 ++newStartingIndex;
             }
         }
 
-        private void RemoveItems(IEnumerable<IMessageItem> oldItems, int oldStartingIndex, bool animate)
+        private async Task RemoveItemsAsync(IEnumerable<IMessageItem> oldItems, int oldStartingIndex, bool animate)
         {
             for (int position = oldStartingIndex + oldItems.Count() - 1; position >= oldStartingIndex; --position)
             {
-                RemoveItem(position, animate);
+                await RemoveItemAsync(position, animate);
             }
         }
 
-        private async void AddItem(IMessageItem newItem, int position, bool animate)
+        private async Task AddItemAsync(IMessageItem newItem, int position, bool animate)
         {
             var linesToMove = new List<StatusLineElement>();
             if (position <= _statusLines.Count)
@@ -182,7 +183,8 @@ namespace StatusBar.iOS.Status
                 LeftConstraint = leftConstraint
             };
 
-            var topLinePosition = (_statusLines.Count + 1) * LineHeight + TopLineHeight;
+            _statusLines.Insert(position, statusLineElement);
+            var topLinePosition = _statusLines.Count * LineHeight + TopLineHeight;
             if (animate)
             {
                 await AnimateAsync(0.2, () =>
@@ -206,10 +208,9 @@ namespace StatusBar.iOS.Status
                 linesToMove.ForEach(line => line.TopConstraint.Constant += LineHeight);
                 LayoutIfNeeded();
             }
-            _statusLines.Insert(position, statusLineElement);
         }
 
-        private async void RemoveItem(int position, bool animate)
+        private async Task RemoveItemAsync(int position, bool animate)
         {
             var linesToMove = new List<StatusLineElement>();
             if (position < _statusLines.Count)

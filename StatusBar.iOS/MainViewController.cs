@@ -32,22 +32,26 @@ namespace StatusBar.iOS
         private async Task ShowTestMessages()
         {
             var messages = ((MainViewModel)ViewModel).Messages.Messages;
+
             await Task.Delay(TimeSpan.FromSeconds(3));
             messages.Add(new MessageItem { MsgType = MessageTypes.Information, Message = "Testing Information" });
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             messages.Add(new MessageItem { MsgType = MessageTypes.Error, Message = "Testing Error" });
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             messages.Insert(1, new MessageItem { MsgType = MessageTypes.Warning, Message = "Testing Warning" });
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            messages.Move(1, 0);
+
+            await Task.Delay(TimeSpan.FromSeconds(3));
             messages.RemoveAt(1);
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             messages.RemoveAt(0);
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             messages.RemoveAt(0);
         }
     }
