@@ -1,4 +1,6 @@
 StatusBar.iOS
 =============
 
-Data-driven status bar vor Xamarin.iOS
+Data-driven status bar for Xamarin.iOS and MvvmCross.
+
+See the sample usage in MainViewController.cs.

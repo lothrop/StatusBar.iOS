@@ -26,9 +26,14 @@ namespace StatusBar.iOS
             bindings.Bind(statusView).For(view => view.ItemsSource).To(vm => vm.Messages.Messages).OneWay();
             bindings.Apply();
 
+            await ShowTestMessages();
+        }
+
+        private async Task ShowTestMessages()
+        {
             var messages = ((MainViewModel)ViewModel).Messages.Messages;
             await Task.Delay(TimeSpan.FromSeconds(3));
-            messages.Add(new MessageItem { MsgType = MessageTypes.Information, Message = "Testing Information"});
+            messages.Add(new MessageItem { MsgType = MessageTypes.Information, Message = "Testing Information" });
 
             await Task.Delay(TimeSpan.FromSeconds(1));
             messages.Add(new MessageItem { MsgType = MessageTypes.Error, Message = "Testing Error" });

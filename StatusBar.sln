@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBar.iOS", "StatusBar.iOS\StatusBar.iOS.csproj", "{DA9B1A2D-0A55-4359-87D1-AEB79EAEE7DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBar.Core", "StatusBar.Core\StatusBar.Core.csproj", "{2AF344F9-594A-4667-B003-9FE570E744B0}"
