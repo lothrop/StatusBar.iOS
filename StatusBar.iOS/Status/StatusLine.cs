@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using MonoTouch.CoreGraphics;
 using MonoTouch.UIKit;
 using StatusBar.Core;
 
