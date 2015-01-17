@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DA9B1A2D-0A55-4359-87D1-AEB79EAEE7DC}</ProjectGuid>
-    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>StatusBar.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
@@ -50,7 +50,7 @@
     <MtouchExtraArgs />
     <MtouchFastDev>False</MtouchFastDev>
     <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
-    <MtouchArch>Default, ARMv7</MtouchArch>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
     <MtouchUseSGen>False</MtouchUseSGen>
@@ -120,32 +120,39 @@
     <BundleResource Include="Resources\Status\Icon_Warning_Accept.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1\lib\MonoTouch\Cirrious.CrossCore.dll</HintPath>
+    <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\Xamarin.iOS10\Cirrious.CrossCore.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.CrossCore.Touch">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1\lib\MonoTouch\Cirrious.CrossCore.Touch.dll</HintPath>
+    <Reference Include="Cirrious.CrossCore.Touch, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\Xamarin.iOS10\Cirrious.CrossCore.Touch.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.0\lib\Xamarin.iOS10\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Binding.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Binding, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Binding.Touch">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Binding.Touch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\Xamarin.iOS10\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Localization.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\Xamarin.iOS10\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Touch">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Touch.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Touch, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.0\lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="monotouch" />
+    <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

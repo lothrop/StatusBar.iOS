@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,7 +8,7 @@ using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Views;
-using MonoTouch.UIKit;
+using UIKit;
 using StatusBar.Core;
 
 namespace StatusBar.iOS.Status

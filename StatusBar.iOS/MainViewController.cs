@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
-using MonoTouch.UIKit;
+using UIKit;
 using StatusBar.Core;
 using StatusBar.iOS.Status;
 

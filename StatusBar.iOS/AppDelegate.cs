@@ -1,8 +1,8 @@
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.ViewModels;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace StatusBar.iOS
 {

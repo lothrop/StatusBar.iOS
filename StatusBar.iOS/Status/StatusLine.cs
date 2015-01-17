@@ -1,6 +1,6 @@
 using System;
-using System.Drawing;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 using StatusBar.Core;
 
 namespace StatusBar.iOS.Status
@@ -140,11 +140,11 @@ namespace StatusBar.iOS.Status
             ConstraintHelpers.AddEqualityConstraint(this, line, NSLayoutAttribute.Right);
         }
 
-        public override SizeF IntrinsicContentSize
+        public override CGSize IntrinsicContentSize
         {
             get
             {
-                return new SizeF(0, 50);
+                return new CGSize(0, 50);
             }
         }
 
